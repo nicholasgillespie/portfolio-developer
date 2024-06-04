@@ -1,0 +1,88 @@
+@import "../00-settings/theme-config";
+@import "../10-functions/helpers/string-manipulation.scss";
+
+// Define a mixin for media queries
+@mixin media-query(
+  $condition: null,
+  $breakpoint1: null,
+  $breakpoint2: null,
+  $extraArgs...
+) {
+  // Retrieving the breakpoints from the theme
+  $breakpoints: map-get($theme, "breakpoints");
+
+  // Converting the breakpoint values to numbers if they exist and are valid
+  $breakpoint1-value: if(
+    $breakpoint1 and map-has-key($breakpoints, $breakpoint1),
+    strToNumber(map-get($breakpoints, $breakpoint1)),
+    null
+  );
+  $breakpoint2-value: if(
+    $breakpoint2 and map-has-key($breakpoints, $breakpoint2),
+    strToNumber(map-get($breakpoints, $breakpoint2)),
+    null
+  );
+
+  // Setting the unit of measurement
+  $unit: "rem";
+
+  // Creating a list of available breakpoints
+  $available-breakpoints: ();
+  @each $key, $value in $breakpoints {
+    $value: strToNumber($value);
+    $available-breakpoints: append(
+      $available-breakpoints,
+      "#{$key} (#{$value}#{$unit})",
+      "comma"
+    );
+  }
+
+  // Checking the validity of the condition
+  @if not $condition or not index(("up-to", "from", "from-to"), $condition) {
+    @warn "Invalid or missing condition. Available conditions are: 'up-to', 'from', 'from-to'.";
+  } @else {
+    // Handling different conditions
+    // 'up-to' condition
+    @if $condition == "up-to" {
+      @if not $breakpoint1-value {
+        @warn "Invalid or missing breakpoint for the 'up-to' condition. Available breakpoints are: #{$available-breakpoints}.";
+      } @else {
+        $breakpoint1-value: $breakpoint1-value;
+        @media (max-width: #{$breakpoint1-value}#{$unit}) {
+          @content;
+        }
+      }
+    }
+    // 'from' condition
+    @else if $condition == "from" {
+      @if not $breakpoint1-value {
+        @warn "Invalid or missing breakpoint for the 'from' condition. Available breakpoints are: #{$available-breakpoints}.";
+      } @else {
+        $breakpoint1-value: $breakpoint1-value;
+        @media (min-width: #{($breakpoint1-value + 0.001)}#{$unit}) {
+          @content;
+        }
+      }
+    }
+    // 'from-to' condition
+    @else if $condition == "from-to" {
+      @if not $breakpoint1-value or not $breakpoint2-value {
+        @warn "Invalid or missing breakpoints for the 'from-to' condition. Available breakpoints are: #{$available-breakpoints}.";
+      } @else if $breakpoint1-value == $breakpoint2-value {
+        @warn "The breakpoints for the 'from-to' condition cannot be the same. Available breakpoints are: #{$available-breakpoints}.";
+      } @else {
+        $breakpoint1-value: $breakpoint1-value;
+        $breakpoint2-value: $breakpoint2-value;
+        // Swapping the values if the first breakpoint is larger than the second
+        @if $breakpoint1-value > $breakpoint2-value {
+          $temp: $breakpoint1-value;
+          $breakpoint1-value: $breakpoint2-value;
+          $breakpoint2-value: $temp;
+        }
+        @media (min-width: #{($breakpoint1-value + 0.001)}#{$unit}) and (max-width: #{$breakpoint2-value}#{$unit}) {
+          @content;
+        }
+      }
+    }
+  }
+}

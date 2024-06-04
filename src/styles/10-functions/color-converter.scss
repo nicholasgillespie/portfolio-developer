@@ -1,0 +1,190 @@
+/*
+ * File: color-converter.scss
+ *
+ * This file contains a collection of functions for converting colors to the P3 color space.
+ * The main function, toP3, takes a color as input and returns the color in the P3 color space.
+ * The color can be in hexadecimal, RGB, or RGBA format.
+ * If the color is null or already in P3 color space, it is returned as is.
+ * If the color format is unknown, a warning is issued and the color is returned as is.
+ *
+ * The file also contains helper functions for formatting color values, converting hexadecimal values to decimal,
+ * slicing a hexadecimal value and converting it to decimal, and checking if a color is in hexadecimal, RGB, or RGBA format.
+ *
+ * The functions in this file are used to apply P3 colors on an existing project, as described in the article at https://piccalil.li/blog/applying-p3-colours-on-an-existing-project/.
+ */
+
+// Importing necessary modules
+@use "sass:math";
+
+// Function to convert a color to the P3 color space
+@function toP3($color) {
+  // If the color is null, return null
+  @if $color == null {
+    @return null;
+  }
+
+  // If the color is already in P3 color space, return the color
+  @if str-index(inspect($color), "color(display-p3") {
+    @return $color;
+  }
+
+  // Initialize the red, green, blue, and alpha values
+  $red: 0;
+  $green: 0;
+  $blue: 0;
+  $alpha: 1;
+
+  // If the color is in hexadecimal format
+  @if is-hex($color) {
+    // Extract the hexadecimal value from the color
+    $hex: str-slice(inspect($color), 2);
+    // Determine the step size based on the length of the hexadecimal value
+    $step: if(str-length($hex) == 8, 2, math.div(str-length($hex), 3));
+    // Convert the red, green, blue, and alpha values from hexadecimal to decimal
+    $red: hexToDecimalSlice($hex, 1, $step);
+    $green: hexToDecimalSlice($hex, $step + 1, 2 * $step);
+    $blue: hexToDecimalSlice($hex, 2 * $step + 1, 3 * $step);
+    $alpha: if(
+      str-length($hex) == 8,
+      hexToDecimalSlice($hex, 3 * $step + 1, 4 * $step),
+      1
+    );
+  }
+  // If the color is in RGB format
+  @else if is-rgb($color) {
+    // Convert the red, green, blue, and alpha values from RGB to decimal
+    $red: math.div(red($color), 255);
+    $green: math.div(green($color), 255);
+    $blue: math.div(blue($color), 255);
+    $alpha: if(is-rgba($color), alpha($color), 1);
+  }
+  // If the color is in RGBA format
+  @else if is-rgba($color) {
+    // Convert the red, green, blue, and alpha values from RGBA to decimal
+    $red: math.div(red($color), 255);
+    $green: math.div(green($color), 255);
+    $blue: math.div(blue($color), 255);
+    $alpha: if(is-rgba($color), alpha($color), 1);
+  }
+  // If the color format is unknown
+  @else {
+    // Warn the user and return the color
+    @warn "Unknown color format";
+    @return $color;
+  }
+
+  // Format the red, green, blue, and alpha values
+  $r: formatColorValue($red);
+  $g: formatColorValue($green);
+  $b: formatColorValue($blue);
+  $a: formatColorValue($alpha);
+
+  // Return the color in P3 color space
+  @return unquote(
+    "color(display-p3 " + $r + " " + $g + " " + $b + " / " + $a + ")"
+  );
+}
+
+// Function to format a color value to have exactly 6 decimal places
+@function formatColorValue($number) {
+  // Round the number to 6 decimal places and convert it to a string
+  $str: "#{roundValue($number, 6)}";
+  // Find the index of the decimal point in the string
+  $index: str-index($str, ".");
+
+  // If the string contains a decimal point
+  @if $index {
+    // Extract the decimal part of the string
+    $decimal: str-slice($str, $index + 1);
+    // Add trailing zeros to the decimal part until it has exactly 6 digits
+    @while str-length($decimal) < 6 {
+      $decimal: $decimal + "0";
+    }
+    // Combine the whole number part, the decimal point, and the decimal part
+    $str: str-slice($str, 1, $index - 1) + "." + $decimal;
+  }
+  // If the string does not contain a decimal point
+  @else {
+    // Add a decimal part with 6 zeros to the string
+    $str: $str + ".000000";
+  }
+
+  // Return the formatted string without quotes
+  @return unquote($str);
+}
+
+// Function to convert a hexadecimal value to decimal
+@function hexToDecimal($hex) {
+  // Define the hexadecimal characters
+  $hexChars: "0123456789abcdef";
+  // Initialize the decimal value
+  $decimal: 0;
+  // Convert the hexadecimal value to lower case
+  $hex: to-lower-case($hex);
+  // Get the length of the hexadecimal value
+  $hexLength: str-length($hex);
+
+  // For each character in the hexadecimal value
+  @for $i from 1 through $hexLength {
+    // Get the character
+    $char: str-slice($hex, $i, $i);
+    // Convert the character to decimal and add it to the decimal value
+    $decimal: $decimal +
+      (str-index($hexChars, $char) - 1) *
+      math.pow(16, $hexLength - $i);
+  }
+
+  // Return the decimal value
+  @return math.div($decimal, ((math.pow(16, $hexLength)) - 1));
+}
+
+// Function to slice a hexadecimal value and convert it to decimal
+@function hexToDecimalSlice($hex, $start, $end) {
+  // Slice the hexadecimal value and convert it to decimal
+  @return hexToDecimal(str-slice($hex, $start, $end));
+}
+
+// Function to check if a color is in hexadecimal format
+@function is-hex($color) {
+  // Extract the color value
+  $colorStr: str-slice(inspect($color), 2);
+  // Define the valid lengths for a hexadecimal color
+  $validLengths: 3, 4, 6, 8;
+  // Define the hexadecimal characters
+  $hexChars: "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c",
+    "d", "e", "f";
+
+  // If the length of the color value is not valid, return false
+  @if not index($validLengths, str-length($colorStr)) {
+    @return false;
+  }
+
+  // For each character in the color value
+  @for $i from 1 through str-length($colorStr) {
+    // If the character is not a hexadecimal character, return false
+    @if not index($hexChars, to-lower-case(str-slice($colorStr, $i, $i))) {
+      @return false;
+    }
+  }
+
+  // If all checks pass, return true
+  @return true;
+}
+
+// Function to check if a color is in RGB format
+@function is-rgb($color) {
+  // Extract the color value
+  $colorStr: inspect($color);
+  // If the color value starts with "rgb(" and ends with ")", return true
+  @return str-slice($colorStr, 1, 4) == "rgb(" and str-slice($colorStr, -1) ==
+    ")";
+}
+
+// Function to check if a color is in RGBA format
+@function is-rgba($color) {
+  // Extract the color value
+  $colorStr: inspect($color);
+  // If the color value starts with "rgba(" and ends with ")", return true
+  @return str-slice($colorStr, 1, 5) == "rgba(" and str-slice($colorStr, -1) ==
+    ")";
+}

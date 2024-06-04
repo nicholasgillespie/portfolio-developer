@@ -1,0 +1,45 @@
+// The `$theme` map is for light and dark modes.
+// To use it:
+// 1. Update `formatToken` to manage 3-level deep tokens.
+// 2. Update `get` to work with 3-level deep nested maps.
+// These updates will enable dynamic theme application with `$theme`.
+
+$theme: (
+  "title": "Themes",
+  "description":
+    "Theme definitions for light and dark modes, including background, color, and border properties.",
+  "items": (
+    "Light": (
+      "bg": (
+        "base": #fafafa,
+        "highlight": #8ee3f9,
+      ),
+      "color": (
+        "base": #28283d,
+        "bold": #4d96a9,
+        "highlight": #71c0d4,
+      ),
+      "border": (
+        "base": #87879d,
+        "bold": #855fb1,
+        "highlight": #d9b8ff,
+      ),
+    ),
+    "Dark": (
+      "bg": (
+        "base": #28283d,
+        "highlight": #4d96a9,
+      ),
+      "color": (
+        "base": #fafafa,
+        "bold": #8ee3f9,
+        "highlight": #71c0d4,
+      ),
+      "border": (
+        "base": #855fb1,
+        "bold": #87879d,
+        "highlight": #d9b8ff,
+      ),
+    ),
+  ),
+);

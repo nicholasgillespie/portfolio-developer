@@ -1,0 +1,45 @@
+/*
+ * File: token-formatter.scss
+ *
+ * This file contains a collection of functions for formatting design tokens.
+ * The main function, formatToken, takes a token and an optional parameter indicating whether the token is nested.
+ * If the token is not nested, the function iterates over each item in the token, formats it using the formatItem function, and adds it to the result map.
+ * If the token is nested, the function handles it differently (implementation not shown in the excerpt).
+ *
+ * The file also contains the getItems function, which retrieves the 'items' from a map, and the formatItem function, which formats an item by creating a new map with slugified names and corresponding values.
+ *
+ * The functions in this file are used to format design tokens in a way that makes them easier to use in a SCSS project.
+ */
+
+// Importing necessary helper functions
+@import "./helpers/string-manipulation.scss";
+
+// Function to retrieve the 'items' from a map
+@function getItems($map) {
+  @return map-get($map, "items");
+}
+
+// Function to format a token by creating a new map with slugified names and corresponding values
+@function formatToken($token, $isNested: null) {
+  $result: ();
+
+  // If the token is nested, handle it differently
+  @if $isNested == "nested" {
+    // Implement nested token formatting here
+  } @else {
+    @each $item in $token {
+      $result: map-merge($result, formatItem($item));
+    }
+  }
+
+  @return $result;
+}
+
+// Function to format an item
+@function formatItem($item) {
+  $name: map-get($item, "name");
+  $slug: slugify($name);
+  $value: map-get($item, "value");
+
+  @return ($slug: $value);
+}

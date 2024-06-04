@@ -1,0 +1,204 @@
+@use "../10-functions/theme-accessor" as *;
+@use "../20-mixins/media-query" as *;
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  outline: solid 1px hotpink;
+}
+
+// GLOBAL SETTINGS ////////////////////
+body {
+  // accent-color: get(color, mint-green);
+  // background: get(color, very-dark-blue);
+  // color: get(color, light-grayish-blue);
+  color: pink;
+  font-family: get(font-family, base);
+  font-size: get(font-size, 1);
+  font-weight: get(font-weight, thin);
+  line-height: get(line-height, base);
+  letter-spacing: get(letter-spacing, base);
+  word-break: break-word;
+  font-size-adjust: from-font;
+}
+
+// DOCUMENT STRUCTURE ////////////////////
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+main {
+  // overflow: hidden;
+}
+
+// TYPOGRAPHY ////////////////////
+h1,
+h2,
+h3,
+h4 {
+  font-family: get(font-family, base);
+  font-weight: get(font-weight, thin);
+  line-height: get(line-height, fine);
+  // color: get(color, mint-green);
+  text-transform: uppercase;
+  // text-wrap: balance;
+  hyphens: auto;
+}
+
+h1 {
+  font-size: get(font-size, 4);
+  max-inline-size: 25ch;
+}
+
+h2 {
+  font-size: get(font-size, 3);
+}
+
+h3 {
+  font-size: get(font-size, 2);
+}
+
+h4,
+h5,
+h6 {
+  font-size: get(font-size, 1);
+}
+
+@supports not (font-size-adjust: from-font) {
+  //
+}
+
+// CONTENT ELEMENTS ////////////////////
+// TEXT ELEMENTS
+p {
+  max-inline-size: var(--measure, 66ch);
+  text-wrap: pretty;
+}
+
+.lede {
+  font-size: get(font-size, 1);
+  // letter-spacing: get(letter-spacing, extra-loose);
+  // text-transform: uppercase;
+  // color: get(color, strong-blue);
+  // font-weight: get(font-weight, black);
+}
+
+b {
+  // color: get-theme("color", "highlight");
+}
+
+// LIST ELEMENTS
+
+// FORM ELEMENTS
+
+// form > * + * {
+//   margin-block-start: var(--flow-space, 1em);
+// }
+
+// :is(input, select, textarea) {
+//   accent-color: var(--color-accent);
+// }
+
+// :is(
+//     input:not([type="checkbox"], [type="radio"], [type="color"]),
+//     select,
+//     textarea
+//   ) {
+//   padding: 0.5em 0.8em;
+//   border-radius: var(--radius-s);
+//   border: var(--stroke-solid);
+//   background: var(--color-dark-glare);
+//   color: var(--color-light);
+//   inline-size: 100%;
+
+//   &::placeholder {
+//     color: rgb(255 255 255 / 70%);
+//   }
+// }
+
+input,
+label {
+  line-height: get(line-height, fine);
+}
+
+// label::after {
+//   content: "\A";
+//   white-space: pre;
+// }
+
+// label:has(input) {
+//   display: flex;
+//   align-items: flex-start;
+//   gap: var(--space-gutter);
+// }
+
+// label:has(input) input {
+//   transform: translateY(0.25ex);
+// }
+
+// label:has(input) + label:has(input) {
+//   --flow-space: var(--space-m);
+//   margin-block-start: var(--space-m);
+// }
+
+// MEDIA ELEMENTS
+
+// IMAGE & SVG ELEMENTS
+
+// TABLE ELEMENTS
+table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  border: none;
+}
+
+// INTERACTIVE ELEMENTS ////////////////////
+// A ELEMENT SPECIFICS
+a {
+  display: inline-block;
+
+  &[aria-current="page"] {
+    font-weight: bold;
+  }
+}
+
+// BUTTON STYLES
+
+// INTERACTIVE STATES ////////////////////
+// FOCUS
+// Favour focus-visible over focus so click events don't trigger focus styles
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-color, currentColor);
+  outline-offset: var(--focus-offset, 0.2lh);
+}
+
+// Firefox requires display: inline-block for full element outline.
+// To avoid flow issues, we detect Firefox and reduce focus offset.
+@supports (-moz-appearance: none) {
+  :root {
+    --focus-offset: 0.08em;
+  }
+}
+
+// SELECTION
+::selection {
+  // color: get-theme("color", "bold");
+  // background: get-color("core", "primary");
+}
+
+// TARGET
+:target {
+  scroll-margin-block: max(2ex, 5lh);
+}
+
+// INTERFACE ELEMENTS ////////////////////
+// SKIP LINK
+
+// SCROLLBAR ////////////////////

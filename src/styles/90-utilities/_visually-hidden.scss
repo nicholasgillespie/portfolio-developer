@@ -1,0 +1,15 @@
+/*
+ * VISUALLY HIDDEN
+ * A utility that hides an element visually but keeps it accessible to assistive technologies like screen readers.
+ * Info: https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html
+ */
+
+.u-vh:not(:focus):not(:active) {
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0); // for IE only
+  clip-path: inset(50%);
+  position: absolute;
+  white-space: nowrap;
+}

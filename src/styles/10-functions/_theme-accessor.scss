@@ -1,0 +1,75 @@
+/*
+ * File: _theme-accessor.scss
+ *
+ * This file provides a function to retrieve token values based on property.
+ * It imports the design token configuration and defines a function `get` that takes a property and a value.
+ * The function checks if the property and value exist in the theme map and returns the corresponding CSS variable.
+ * If the property or value does not exist, it prints a warning message.
+ */
+
+// Importing necessary theme-config
+@import "../00-settings/theme-config";
+
+// Function to retrieve token values based on property
+@function get($property: null, $value: null) {
+  // Store the original property value
+  $originalProperty: $property;
+
+  // Convert $value to a string if it's a number
+  $value: if(type-of($value) == "number", "#{ $value }", $value);
+
+  // If the property is "space", set it to "margin"
+  $property: if($property == "space", "margin", $property);
+
+  // Collect all properties that map to a token
+  $validProperties: ();
+  $propertyExists: false;
+
+  // Iterate over each group in the groups map
+  @each $group in $groups {
+    $tokenName: map-get($group, "key");
+    $properties: map-get($group, "properties");
+
+    // Handle spacing token separately
+    @if $tokenName == "spacing" {
+      $properties: ("margin", "padding");
+    } @else if type-of($properties) == "map" {
+      $properties: map-keys($properties);
+    } @else if type-of($properties) == "string" {
+      $properties: ($properties);
+    }
+
+    // Join the properties to the valid properties list
+    $validProperties: join($validProperties, $properties);
+
+    // Check if property exists in the map or list
+    $propertyExists: index($properties, $property);
+
+    // If the property exists, check if the value exists in the items
+    @if $propertyExists {
+      $prefix: map-get($group, "prefix");
+      $items: map-get($theme, $tokenName);
+
+      // Convert color values to a string
+      $value: if(type-of($value) == "color", inspect($value), $value);
+
+      // If value exists in map, return CSS variable; else, warn invalid value
+      @if $prefix and map-has-key($items, $value) {
+        @return var(--#{$prefix}-#{$value});
+      } @else {
+        @if $originalProperty == "space" {
+          $property: "space";
+        }
+        @warn "Invalid value `#{$value}` for property `#{$property}`. Available values are: #{map-keys($items)}.";
+        @return null;
+      }
+    }
+  }
+
+  // If the property does not exist, print a warning message
+  @if not $propertyExists {
+    @warn "Invalid property `#{$property}`. Available properties are: #{$validProperties}.";
+  }
+
+  @return null;
+}

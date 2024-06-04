@@ -1,0 +1,26 @@
+/*
+ * POSITION UTILITY
+ * A utility that sets the position of an element.
+ */
+
+.u-position {
+  &--relative {
+    position: relative;
+  }
+
+  &--absolute {
+    position: absolute;
+  }
+
+  &--fixed {
+    position: fixed;
+  }
+
+  &--sticky {
+    position: sticky;
+  }
+
+  &--static {
+    position: static;
+  }
+}

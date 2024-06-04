@@ -1,0 +1,26 @@
+// Function to round a number to a specified number of digits
+@function roundValue($number, $digits: 4) {
+  $n: 1;
+  // $number must be a number
+  @if type-of($number) != number {
+    @warn '#{ $number } is not a number.';
+    @return $number;
+  }
+  // $digits must be a unitless number
+  @if type-of($digits) != number {
+    @warn '#{ $digits } is not a number.';
+    @return $number;
+  } @else if not unitless($digits) {
+    @warn '#{ $digits } has a unit.';
+    @return $number;
+  }
+  @for $i from 1 through $digits {
+    $n: $n * 10;
+  }
+  @return math.div(round($number * $n), $n);
+}
+
+// Function to convert rem to px
+@function remToPx($value) {
+  @return $value * 16;
+}

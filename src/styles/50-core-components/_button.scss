@@ -1,0 +1,40 @@
+// @use "../10-functions/theme-accessor" as *;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5ch;
+  position: relative;
+  padding: var(--button-padding, 1em 2em);
+  line-height: var(--button-line-height, get(line-height, base));
+  background-color: var(--button-bg, transparent);
+  color: var(--button-text, inherit);
+  border: var(--button-border, solid var(--border-width, medium) transparent);
+  border-radius: var(--button-radius, 0em);
+  cursor: pointer;
+  text-decoration: none;
+  font-size: var(--button-font-size, get(font-size, base));
+  font-family: var(--button-font-family, inherit);
+  font-weight: var(--button-font-weight, bold);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-uppercase);
+
+  &:hover,
+  &:focus-visible {
+    // --button-bg: blue;
+    // --button-text: red;
+    // filter: brightness(90%);
+  }
+
+  &[data-button="secondary"] {
+    --button-bg: blue;
+    --button-text: red;
+
+    &:hover,
+    &:focus-visible {
+      --button-bg: yellow;
+      --button-text: green;
+    }
+  }
+}

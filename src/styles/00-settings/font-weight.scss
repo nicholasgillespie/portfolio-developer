@@ -1,0 +1,30 @@
+$font-weight: (
+  "title": "Font Weight",
+  "description": "Helper classes and custom properties for common font weights",
+  "items": (
+    (
+      "name": "Thin",
+      "value": 100,
+    ),
+    (
+      "name": "Extra Light",
+      "value": 200,
+    ),
+    (
+      "name": "Light",
+      "value": 300,
+    ),
+    (
+      "name": "Base",
+      "value": 400,
+    ),
+    (
+      "name": "Medium",
+      "value": 500,
+    ),
+    (
+      "name": "Bold",
+      "value": 700,
+    ),
+  ),
+);

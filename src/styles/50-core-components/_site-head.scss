@@ -1,0 +1,9 @@
+.site-head {
+  background: var(--color-dark-glare);
+  color: var(--color-light);
+  padding: var(--space-m) 0; /* Horizontal padding is handled by wrapper */
+  line-height: var(--leading-flat);
+  font-size: var(--size-step-00);
+  letter-spacing: var(--uppercase-kerning);
+  text-transform: uppercase;
+}

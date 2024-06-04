@@ -1,0 +1,10 @@
+/*
+ * TEXT ALIGN CENTER
+ * A utility that aligns the text to the center of its container.
+ */
+
+.u-text-align {
+  &--center {
+    text-align: center;
+  }
+}

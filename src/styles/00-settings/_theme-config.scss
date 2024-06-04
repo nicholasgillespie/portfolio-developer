@@ -1,0 +1,123 @@
+/*
+ * File: _theme-config.scss
+ *
+ * This file imports design tokens and functions, formats and processes these tokens, and centralizes them in a theme map.
+ * It also defines token groups with a key, prefix for CSS variables, and applicable properties.
+ *
+ * The design tokens include colors, spacing, font size, line height, font family, font weight, letter spacing, and viewports.
+ * The functions imported are used to format tokens, generate clamps, manipulate strings, provide values, and manipulate maps.
+ *
+ * The theme map centralizes all the processed design tokens for easy access throughout the project.
+ * The token groups are used to generate CSS custom properties and utility classes in other parts of the project.
+ */
+
+// Import design tokens
+@import "./colors";
+@import "./spacing";
+@import "./font-size";
+@import "./line-height";
+@import "./font-family";
+@import "./font-weight";
+@import "./letter-spacing";
+@import "./viewports";
+
+// Import functions
+@import "../10-functions/token-formatter.scss";
+@import "../10-functions/clamp-generator";
+@import "../10-functions/helpers/string-manipulation.scss";
+@import "../10-functions/helpers/value-providers";
+@import "../10-functions/helpers/map-manipulation";
+
+// Format and process design tokens
+// The formatToken function formats the tokens and the clampGenerator function generates clamps for responsive design
+$viewports: formatToken(getItems($viewports));
+$colors: formatToken(getItems($colors));
+$spacing: formatToken(clampGenerator(getItems($spacing), $viewports, "usePx"));
+$font-size: formatToken(clampGenerator(getItems($font-size), $viewports));
+$line-height: formatToken(getItems($line-height));
+$font-family: formatToken(getItems($font-family));
+$font-weight: formatToken(getItems($font-weight));
+$letter-spacing: formatToken(getItems($letter-spacing));
+
+// Centralize design token values in theme map
+// This map is used throughout the project to apply the theme consistently
+$theme: (
+  "layout": (
+    "base-max": #{map-get($viewports, "max")}rem,
+  ),
+  "breakpoints": (
+    "sm": #{map-get($viewports, "min")}rem,
+    "md": #{map-get($viewports, "mid")}rem,
+    "lg": #{map-get($viewports, "lrg")}rem,
+    "xl": #{map-get($viewports, "max")}rem,
+  ),
+  "colors": $colors,
+  "spacing": $spacing,
+  "font-size": $font-size,
+  "line-height": $line-height,
+  "font-family": $font-family,
+  "font-weight": $font-weight,
+  "letter-spacing": $letter-spacing,
+);
+
+// Define token groups with a key, prefix for CSS variables, and applicable properties
+// These groups are used to generate CSS custom properties and utility classes in other parts of the project
+$groups: (
+  (
+    key: "colors",
+    prefix: "color",
+    properties: (
+      "color",
+      "background-color",
+    ),
+  ),
+  (
+    key: "spacing",
+    prefix: "space",
+    properties:
+      map-merge(
+        mapPrefix("margin", logicalSuffixes()),
+        mapPrefix("padding", logicalSuffixes())
+      ),
+  ),
+  (
+    key: "font-size",
+    prefix: "font-size",
+    properties: (
+      "font-size",
+    ),
+  ),
+  (
+    key: "line-height",
+    prefix: "line-height",
+    properties: (
+      "line-height",
+    ),
+  ),
+  (
+    key: "font-family",
+    prefix: "font-family",
+    properties: (
+      "font-family",
+    ),
+  ),
+  (
+    key: "font-weight",
+    prefix: "font-weight",
+    properties: (
+      "font-weight",
+    ),
+  ),
+  (
+    key: "letter-spacing",
+    prefix: "letter-spacing",
+    properties: (
+      "letter-spacing",
+    ),
+  ),
+  (
+    key: "layout",
+    prefix: "layout",
+    properties: (),
+  )
+);

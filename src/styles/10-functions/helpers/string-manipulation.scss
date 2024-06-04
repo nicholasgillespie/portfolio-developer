@@ -1,0 +1,130 @@
+// Function to abbreviate a string by taking the first letter of each word
+@function abbreviate($string) {
+  $abbreviation: "";
+  $words: strSplit($string, "-");
+  @each $word in $words {
+    $abbreviation: $abbreviation + str-slice($word, 0, 1);
+  }
+  @return $abbreviation;
+}
+
+// Function to convert a list into a string with items separated by a specified delimiter
+@function listToString($list, $delimiter: "-") {
+  $string: "";
+  @each $item in $list {
+    $string: $string + $item + $delimiter;
+  }
+  $string: str-slice($string, 1, str-length($string) - str-length($delimiter));
+  @return $string;
+}
+
+// Function to convert a string into a slug (lowercase with spaces replaced by hyphens and disallowed characters removed)
+@function slugify($string) {
+  $string: strReplace($string, " - ", "-");
+  $disallowed: "'\"!@#$%^&*()+=[]{}|;:,.<>?/`~"; // Add any other disallowed characters here
+
+  $result: "";
+
+  @for $i from 1 through str-length($string) {
+    $char: str-slice($string, $i, $i);
+    @if not str-index($disallowed, $char) {
+      $result: $result + $char;
+    }
+  }
+
+  @return toLowerCase(strReplace($result, " ", "-"));
+}
+
+// Function to replace occurrences of a substring within a string
+@function strReplace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace +
+      strReplace(
+        str-slice($string, $index + str-length($search)),
+        $search,
+        $replace
+      );
+  }
+
+  @return $string;
+}
+
+// Function to convert a string to a number
+@function strToNumber($value) {
+  @if type-of($value) == "number" {
+    @return $value;
+  } @else if type-of($value) != "string" {
+    @error 'Invalid value `#{$value}` of type #{type-of($value)} for strToNumber. The value must be a number or a string.';
+  }
+
+  $result: 0;
+  $digits: 0;
+  $minus: str-slice($value, 1, 1) == "-";
+  $numbers: (
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "4": 4,
+    "5": 5,
+    "6": 6,
+    "7": 7,
+    "8": 8,
+    "9": 9,
+  );
+
+  @for $i from if($minus, 2, 1) through str-length($value) {
+    $character: str-slice($value, $i, $i);
+
+    @if (index(map-keys($numbers), $character) or $character == ".") {
+      @if $character == "." {
+        $digits: 1;
+      } @else if $digits == 0 {
+        $result: $result * 10 + map-get($numbers, $character);
+      } @else {
+        $digits: $digits * 10;
+        $result: $result + map-get($numbers, $character) / $digits;
+      }
+    }
+  }
+
+  @return if($minus, -$result, $result);
+}
+
+// Function to split a string into a list of substrings based on a delimiter
+@function strSplit($string, $delimiter) {
+  $index: str-index($string, $delimiter);
+  $array: ();
+
+  @while $index {
+    $item: str-slice($string, 1, $index - 1);
+    $array: append($array, $item);
+    $string: str-slice($string, $index + str-length($delimiter));
+    $index: str-index($string, $delimiter);
+  }
+
+  $array: append($array, $string);
+  @return $array;
+}
+
+// Function to convert a string to lowercase
+@function toLowerCase($string) {
+  $lowercase: "abcdefghijklmnopqrstuvwxyz";
+  $uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  $result: "";
+
+  @for $i from 1 through str-length($string) {
+    $char: str-slice($string, $i, $i);
+    $index: str-index($uppercase, $char);
+
+    @if $index {
+      $result: $result + str-slice($lowercase, $index, $index);
+    } @else {
+      $result: $result + $char;
+    }
+  }
+
+  @return $result;
+}

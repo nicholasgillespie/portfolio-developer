@@ -1,0 +1,82 @@
+/*
+ * File: clampGenerator.scss
+ *
+ * This function generates clamp() values for design tokens. It takes a token, viewports, and optional unit types as parameters.
+ * The function calculates the slope and intersection for each token based on the minimum and maximum viewport widths.
+ * It then generates a clamp() value for the token and adds it to the result list.
+ * The function returns the result list, which contains the name and clamp() value for each token.
+ */
+
+// Importing necessary modules and helper functions
+@use "sass:math";
+@import "./helpers/number-manipulation.scss";
+
+// Function to generate clamp() values for design tokens
+@function clampGenerator(
+  $token,
+  $viewports,
+  $unitType: "rem",
+  $relativeUnitType: "vw"
+) {
+  // Get the minimum and maximum viewport widths
+  $minWidth: remToPx(map-get($viewports, "min"));
+  $maxWidth: remToPx(map-get($viewports, "max"));
+
+  // Initialize the result list
+  $result: ();
+
+  // Set the unit based on the $unitType parameter
+  $unit: 0.0625rem;
+  @if ($unitType == "usePx") {
+    $unit: 1px;
+  }
+
+  // Set the relative unit based on the $relativeUnitType parameter
+  $relativeUnit: 1vw;
+  @if ($relativeUnitType == "useCqi") {
+    $relativeUnit: 1cqi;
+  } @else if ($relativeUnitType == "useVi") {
+    $relativeUnit: 1vi;
+  }
+
+  // Iterate over each token
+  @each $item in $token {
+    // Get the name, minimum size, and maximum size of the token
+    $name: map-get($item, "name");
+    $minSize: map-get($item, "min");
+    $maxSize: map-get($item, "max");
+
+    // If the minimum size is greater than the maximum size, swap them
+    $isNegative: $minSize > $maxSize;
+    @if ($isNegative) {
+      $temp: $minSize;
+      $minSize: $maxSize;
+      $maxSize: $temp;
+    }
+
+    // Calculate the slope and intersection for the token
+    $slope: math.div(($maxSize - $minSize), ($maxWidth - $minWidth));
+    $intersection: (-1 * $minWidth) * $slope + $minSize;
+
+    // Adjust slope & intersection if minSize originally greater than maxSize
+    @if ($isNegative) {
+      $intersection: math.div((($maxWidth * $slope) + $minSize), 1);
+      $slope: $slope * -1;
+    }
+
+    // Generate the clamp() value for the token
+    $clampValue: "clamp(#{roundValue($minSize * $unit)}, #{roundValue($intersection * $unit)} + #{roundValue($slope * 100) * $relativeUnit}, #{roundValue($maxSize * $unit)})";
+
+    // Add the token's name and clamp() value to the result list
+    $result: append(
+      $result,
+      (
+        "name": $name,
+        "value": $clampValue,
+      )
+    );
+  }
+
+  // Return the result list
+  @return $result;
+}

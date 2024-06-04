@@ -1,0 +1,205 @@
+/*
+ * File: _theme-applier.scss
+ *
+ * This file contains mixins that generate CSS custom properties, utility classes, and custom utility classes from a theme.
+ * It imports design token configurations and color conversion functions.
+ * The mixins in this file are used in various parts of the project to apply the theme consistently.
+ *
+ * Mixins:
+ * - themeCssVariables: Generates global CSS custom properties from the theme.
+ * - tokenCssVariables: Generates CSS custom properties for a specific token.
+ * - themeUtilityClasses: Generates utility classes from the theme.
+ * - themeUtilityCustoms: Generates custom utility classes from the theme.
+ */
+
+// Importing necessary theme-config and helper functions
+@import "../00-settings/theme-config";
+@import "../10-functions/color-converter.scss";
+
+// Mixin to generate global CSS custom properties from theme
+// This should be used in the 30-base/root.scss file
+@mixin themeCssVariables() {
+  @each $group in $groups {
+    $tokenName: map-get($group, "key");
+    @include tokenCssVariables($tokenName);
+  }
+}
+
+// Mixin to generate CSS custom properties for a specific token
+// If a function is provided, it will be applied to the token value
+@mixin tokenCssVariables($tokenName, $function: null) {
+  // Loop through each group in the theme
+  @each $group in $groups {
+    $groupTokenName: map-get($group, "key");
+    // Check if the current group matches the provided token name
+    @if ($groupTokenName == $tokenName) {
+      $prefix: map-get($group, "prefix");
+      $token: map-get($theme, $tokenName);
+
+      // Loop through each item in the token
+      @each $itemName, $itemValue in $token {
+        // If a function is provided, apply it to the item value
+        @if $function {
+          --#{$prefix}-#{$itemName}: #{call(
+              get-function($function),
+              $itemValue
+            )};
+        } @else {
+          --#{$prefix}-#{$itemName}: #{$itemValue};
+        }
+      }
+    }
+  }
+}
+
+// Mixin to generate utility classes from theme
+// This should be used in the 90-utilities/index.scss file
+// prettier-ignore
+@mixin themeUtilityClasses() {
+  // Define utility name adjustments
+  $nameAdjust: (
+    "background-color": (
+      "abbr": "bg", 
+      "property": "background"),
+    "color": (
+      "abbr": "text", 
+      "property": "color")
+  );
+
+  // Loop through each group in the theme
+  @each $group in $groups {
+    $tokenName: map-get($group, "key");
+    $prefix: map-get($group, "prefix");
+    $properties: map-get($group, "properties");
+    $token: map-get($theme, $tokenName);
+
+    // If properties are defined for the group, generate utility classes
+    @if $properties != null {
+      @each $property in $properties {
+        $propOrAbbr: $property;
+        $propertyValue: $property;
+
+        // Check if property is in nameAdjust
+        @if map-has-key($nameAdjust, $property) {
+          $propOrAbbr: map-get(map-get($nameAdjust, $property), "abbr");
+          $propertyValue: map-get(map-get($nameAdjust, $property), "property");
+        }
+
+        // Exceptions
+        // Generate utility classes for auto and zero spacing
+        @if $tokenName == "spacing" {
+          $propOrAbbr: abbreviate(listToString($property));
+          .u-#{$propOrAbbr}-auto {
+            #{$propertyValue}: auto;
+          }
+          .u-#{$propOrAbbr}-zero {
+            #{$propertyValue}: 0;
+          }
+        }
+
+        // Generate utility classes for each item in the token
+        @each $itemName in map-keys($token) {
+          .u-#{$propOrAbbr}-#{$itemName} {
+            #{$propertyValue}: var(--#{$prefix}-#{$itemName});
+          }
+        }
+      }
+    }
+  }
+}
+
+// Mixin to generate custom utility classes from theme
+// This should be used in the 90-utilities/index.scss file
+@mixin themeUtilityCustoms() {
+  // Define custom utility classes
+  $tokenPrefixesProperties: (
+    // Add your custom utility classes here
+    // Format: ("tokenName": "token", "prefix": "class-prefix", "property": "css-property")
+    (
+        "tokenName": "spacing",
+        "prefix": "space-box",
+        "property": "--space-box",
+      ),
+    (
+      "tokenName": "spacing",
+      "prefix": "space-cluster",
+      "property": "--space-cluster",
+    ),
+    (
+      "tokenName": "spacing",
+      "prefix": "space-columns",
+      "property": "--space-columns",
+    ),
+    (
+      "tokenName": "spacing",
+      "prefix": "space-cover",
+      "property": "--space-cover",
+    ),
+    (
+      "tokenName": "spacing",
+      "prefix": "space-flow",
+      "property": "--space-flow",
+    ),
+    (
+      "tokenName": "spacing",
+      "prefix": "space-grid",
+      "property": "--space-grid",
+    ),
+    (
+      "tokenName": "spacing",
+      "prefix": "space-gutter",
+      "property": "--space-gutter",
+    ),
+    (
+      "tokenName": "spacing",
+      "prefix": "space-region",
+      "property": "--space-region",
+    ),
+    (
+      "tokenName": "spacing",
+      "prefix": "space-repel",
+      "property": "--space-repel",
+    ),
+    (
+      "tokenName": "spacing",
+      "prefix": "space-sidebar",
+      "property": "--space-sidebar",
+    ),
+    (
+      "tokenName": "spacing",
+      "prefix": "space-stack",
+      "property": "--space-stack",
+    ),
+    (
+      "tokenName": "spacing",
+      "prefix": "space-switcher",
+      "property": "--space-switcher",
+    )
+  );
+
+  // Loop through each custom utility class
+  @each $tokenPrefixProperty in $tokenPrefixesProperties {
+    $tokenName: map-get($tokenPrefixProperty, "tokenName");
+    $prefix: map-get($tokenPrefixProperty, "prefix");
+    $property: map-get($tokenPrefixProperty, "property");
+
+    $token: map-get($theme, $tokenName);
+    $tokenPrefix: null;
+
+    // Find the prefix for the token
+    @each $group in $groups {
+      @if map-get($group, "key") == $tokenName {
+        $tokenPrefix: map-get($group, "prefix");
+      }
+    }
+
+    // If the token and prefix are found, generate the custom utility classes
+    @if $token != null and $tokenPrefix != null {
+      @each $itemName, $itemValue in $token {
+        .u-#{$prefix}-#{$itemName} {
+          #{$property}: var(--#{$tokenPrefix}-#{$itemName});
+        }
+      }
+    }
+  }
+}

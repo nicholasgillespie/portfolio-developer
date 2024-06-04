@@ -1,0 +1,8 @@
+// Function to prefix keys in a map and return a new map with null values
+@function mapPrefix($prefix, $keys) {
+  $result: ();
+  @each $key in $keys {
+    $result: map-merge($result, ($prefix + $key: null));
+  }
+  @return $result;
+}

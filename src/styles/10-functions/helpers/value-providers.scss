@@ -1,0 +1,12 @@
+// Function to provide a list of logical suffixes for CSS properties
+@function logicalSuffixes() {
+  @return (
+    "",
+    "-block",
+    "-block-start",
+    "-block-end",
+    "-inline",
+    "-inline-start",
+    "-inline-end"
+  );
+}

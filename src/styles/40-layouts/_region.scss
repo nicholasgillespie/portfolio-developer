@@ -1,0 +1,11 @@
+/*
+ * REGION
+ * A layout that provides consistent block padding for page sections.
+ * 
+ * CUSTOM PROPERTIES AND CONFIGURATION
+ * --region-padding: The padding of the region. Default is var(--space-gutter).
+ */
+
+.l-region {
+  padding-block: var(--space-region, var(--space-gutter));
+}
