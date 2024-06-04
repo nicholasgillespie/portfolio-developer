@@ -9,6 +9,12 @@
   --item-size-min: 15rem;
   --measure: 66ch;
 
+  // Transition
+  // --transition-base: 250ms ease;
+  // --transition-movement: 200ms linear;
+  // --transition-fade: 300ms ease;
+  // --transition-bounce: 500ms cubic-bezier(0.5, 0.05, 0.2, 1.5);
+
   // P3 color generation if supported
   @media (color-gamut: p3) {
     @supports (color: color(display-p3 0 0 0 / 1)) {
@@ -21,9 +27,9 @@
 :root {
   // Spacing
   --space-gutter: #{get(space, s-l)};
-  --space-gutter-s: #{get(space, s)};
-  --space-gutter-m: #{get(space, s-m)};
-  --space-gutter-l: #{get(space, l)};
+  // --space-gutter-s: #{get(space, s)};
+  // --space-gutter-m: #{get(space, s-m)};
+  // --space-gutter-l: #{get(space, l)};
   --space-region: #{get(space, 3xl)};
 
   // Typography
@@ -45,12 +51,6 @@
   --border-width: 4px;
   --border: solid var(--border-width) var(--border-color);
   --shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
-
-  // Transition
-  // --transition-base: 250ms ease;
-  // --transition-movement: 200ms linear;
-  // --transition-fade: 300ms ease;
-  --transition-bounce: 500ms cubic-bezier(0.5, 0.05, 0.2, 1.5);
 }
 
 // COMPONENT-SPECIFIC TOKENS --------------------

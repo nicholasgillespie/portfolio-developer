@@ -16,8 +16,8 @@ body {
   // color: get(color, light-grayish-blue);
   color: pink;
   font-family: get(font-family, base);
-  font-size: get(font-size, 1);
-  font-weight: get(font-weight, thin);
+  font-size: get(font-size, base);
+  // font-weight: get(font-weight, thin);
   line-height: get(line-height, base);
   letter-spacing: get(letter-spacing, base);
   word-break: break-word;
@@ -40,31 +40,31 @@ h2,
 h3,
 h4 {
   font-family: get(font-family, base);
-  font-weight: get(font-weight, thin);
+  // font-weight: get(font-weight, thin);
   line-height: get(line-height, fine);
   // color: get(color, mint-green);
-  text-transform: uppercase;
+  // text-transform: uppercase;
   // text-wrap: balance;
   hyphens: auto;
 }
 
 h1 {
-  font-size: get(font-size, 4);
+  font-size: get(font-size, title);
   max-inline-size: 25ch;
 }
 
 h2 {
-  font-size: get(font-size, 3);
+  font-size: get(font-size, xl);
 }
 
 h3 {
-  font-size: get(font-size, 2);
+  font-size: get(font-size, l);
 }
 
 h4,
 h5,
 h6 {
-  font-size: get(font-size, 1);
+  font-size: get(font-size, m);
 }
 
 @supports not (font-size-adjust: from-font) {
@@ -79,7 +79,7 @@ p {
 }
 
 .lede {
-  font-size: get(font-size, 1);
+  // font-size: get(font-size, 1);
   // letter-spacing: get(letter-spacing, extra-loose);
   // text-transform: uppercase;
   // color: get(color, strong-blue);

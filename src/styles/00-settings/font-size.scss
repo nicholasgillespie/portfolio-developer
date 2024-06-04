@@ -8,14 +8,14 @@ $font-size: (
   ),
   "items": (
     (
-      "name": "-2",
+      "name": "Info",
       "min": 11.11,
       "max": 10.13,
     ),
     (
-      "name": "-1",
-      "min": 13.33,
-      "max": 13.5,
+      "name": "Input",
+      "min": 16,
+      "max": 16,
     ),
     (
       "name": "Base",
@@ -23,29 +23,24 @@ $font-size: (
       "max": 18,
     ),
     (
-      "name": "1",
-      "min": 19.2,
-      "max": 23.99,
+      "name": "M",
+      "min": 24,
+      "max": 24,
     ),
     (
-      "name": "2",
-      "min": 23.04,
-      "max": 31.98,
+      "name": "L",
+      "min": 32,
+      "max": 48,
     ),
     (
-      "name": "3",
-      "min": 27.65,
-      "max": 42.63,
+      "name": "XL",
+      "min": 40,
+      "max": 88,
     ),
     (
-      "name": "4",
-      "min": 33.18,
-      "max": 56.83,
-    ),
-    (
-      "name": "5",
-      "min": 39.81,
-      "max": 75.76,
+      "name": "Title",
+      "min": 24,
+      "max": 32,
     ),
   ),
 );

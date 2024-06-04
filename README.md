@@ -4,7 +4,7 @@ Visit the live site here: [Portfolio Developer Website](https://nicholasgillespi
 
 ## Overview
 
-The Portfolio Developer Index Calculator is a Vite and PostCSS-based project, hosted on GitHub Pages. It incorporates the in-development W3C design system, utilizing SCSS syntax for styling.
+The Portfolio Developer is a Vite and PostCSS-based project, hosted on GitHub Pages. It incorporates the in-development W3C design system, utilizing SCSS syntax for styling.
 
 [![Screenshot of the Portfolio Developer project](./docs/design/preview.jpg)](https://nicholasgillespie.github.io/portfolio-developer/)
 
