@@ -6,15 +6,14 @@
 *::after {
   margin: 0;
   padding: 0;
-  outline: solid 1px hotpink;
+  // outline: solid 1px hotpink;
 }
 
 // GLOBAL SETTINGS ////////////////////
 body {
   // accent-color: get(color, mint-green);
   // background: get(color, very-dark-blue);
-  // color: get(color, light-grayish-blue);
-  color: pink;
+  color: get(color, grey);
   font-family: get(font-family, base);
   font-size: get(font-size, base);
   // font-weight: get(font-weight, thin);
@@ -42,7 +41,7 @@ h4 {
   font-family: get(font-family, base);
   // font-weight: get(font-weight, thin);
   line-height: get(line-height, fine);
-  // color: get(color, mint-green);
+  color: get(color, white);
   // text-transform: uppercase;
   // text-wrap: balance;
   hyphens: auto;
@@ -159,6 +158,7 @@ table {
 // A ELEMENT SPECIFICS
 a {
   display: inline-block;
+  text-transform: uppercase;
 
   &[aria-current="page"] {
     font-weight: bold;

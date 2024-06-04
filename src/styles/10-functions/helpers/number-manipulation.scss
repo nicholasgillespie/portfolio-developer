@@ -24,3 +24,11 @@
 @function remToPx($value) {
   @return $value * 16;
 }
+
+// Function to removes the unit from a numeric value
+@function stripUnit($value) {
+  @if type-of($value) == "number" and not unitless($value) {
+    @return math.div($value, $value * 0 + 1);
+  }
+  @return $value;
+}

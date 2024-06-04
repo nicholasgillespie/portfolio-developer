@@ -32,8 +32,8 @@
     <a href="#main" id="skip-link" class="">Skip to main content</a>
 
     <!-- Header -->
-    <header>
-      <div class="l-repel">
+    <header class="site-head l-wrapper">
+      <div class="[ site-head__nav ][ l-repel ]">
         <h1>adamkeyes</h1>
         <div class="l-cluster">
           <a href="#">
@@ -50,7 +50,40 @@
           </a>
         </div>
       </div>
-      <div></div>
+      <div class="[ site-head__text ][ l-flow ]">
+        <h2>
+          Nice to meet you! I'm <span class="u-emphasise">Adam Keyes</span>.
+        </h2>
+        <p>
+          Based in the UK, I’m a front-end developer passionate about building
+          accessible web apps that users love.
+        </p>
+        <a href="#contact">Contact Me</a>
+      </div>
+      <picture class="site-head__img">
+        <source
+          srcset="./images/image-profile-desktop.webp"
+          media="(min-width: 50.001rem)"
+          type="image/webp"
+        />
+        <source
+          srcset="./images/image-profile-tablet.webp"
+          media="(min-width: 30.001rem) and (max-width: 50rem)"
+          type="image/webp"
+        />
+        <source
+          srcset="./images/image-profile-mobile.webp"
+          media="(max-width: 30rem)"
+          type="image/webp"
+        />
+        <img
+          src="./images/image-profile-desktop.webp"
+          alt="Hero"
+          width="563"
+          height="911"
+          loading="eager"
+        />
+      </picture>
     </header>
 
     <!-- Main -->

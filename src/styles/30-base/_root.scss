@@ -45,9 +45,9 @@
   --radius-l: #{get(space, xl)};
 
   // Decorations
-  --focus-color: #{get(color, mint-green)};
+  --focus-color: #{get(color, green)};
   // --focus-color: red;
-  --border-color: #{get(color, mint-green)};
+  --border-color: #{get(color, green)};
   --border-width: 4px;
   --border: solid var(--border-width) var(--border-color);
   --shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
