@@ -1,2 +1,46 @@
+@use "../20-mixins/media-query.scss" as *;
+
 .project {
+  --space-region: 0 var(--space-xl-3xl);
+  --grid-item-size-min: 30rem;
+
+  & > ul {
+    --space-grid: var(--space-l-2xl) var(--space-gutter);
+    margin-block-start: var(--space-gutter);
+  }
+
+  @include media-query(up-to, "widescreen") {
+    --grid-item-size-min: clamp(22rem, 18.6667rem + 6.6667vi, 24rem);
+  }
+  @include media-query(up-to, "desktop") {
+    --grid-item-size-min: clamp(12.5rem, 8.75rem + 12.5vi, 15rem);
+  }
+  @include media-query(up-to, "tablet") {
+    --grid-item-size-min: 30rem;
+  }
+
+  .project__item {
+    text-transform: uppercase;
+  }
+
+  .project__item-image-container {
+    position: relative;
+
+    .project__item-image-links {
+      --stack-vertical-alignment: center;
+      --stack-horizontal-alignment: center;
+
+      position: absolute;
+      inset: 0;
+      background-color: rgba(255, 0, 0, 0.5);
+    }
+  }
+
+  .project__item-text {
+    --space-cluster: 0em 1em;
+
+    & > ul {
+      --space-flow: 0.5em;
+    }
+  }
 }

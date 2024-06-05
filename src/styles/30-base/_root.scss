@@ -40,9 +40,9 @@
   // --text-size-heading-4: #{get(font-size, 2)};
 
   // Radius
-  --radius: #{get(space, xs)};
-  --radius-s: #{get(space, 2xs)};
-  --radius-l: #{get(space, xl)};
+  --radius: 0;
+  // --radius-s: #{get(space, 2xs)};
+  // --radius-l: #{get(space, xl)};
 
   // Decorations
   --focus-color: #{get(color, green)};

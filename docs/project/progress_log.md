@@ -29,6 +29,17 @@
 
 - Completed `site-head` component, now fully responsive.
 
+## 2024-06-05 - Afternoon
+
+### Sections Skill and Project
+
+- Worked on and completed the layout for the "Skill" and "Projects" sections, making them responsive.
+
+**To Do:**
+
+- For the "Skill" section, position the rings pattern.
+- For the "Projects" section, implement hover effect on the project images to display/hide links depending on screen size.
+
 ---
 
 ## [Date] - [Session]
