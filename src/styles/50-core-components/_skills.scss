@@ -1,0 +1,27 @@
+@use "../20-mixins/media-query.scss" as *;
+
+.skill {
+  --grid-item-size-min: 20rem;
+  position: relative;
+
+  @include media-query(up-to, "widescreen") {
+    --grid-item-size-min: clamp(14.5rem, 10rem + 9vi, 17.2rem);
+  }
+  @include media-query(up-to, "desktop") {
+    --grid-item-size-min: clamp(13.2rem, 11.1rem + 7vi, 14.6rem);
+  }
+  @include media-query(up-to, "tablet") {
+    --space-grid: 2em;
+    --space-flow: 0.75em;
+    text-align: center;
+  }
+
+  .pattern-rings {
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-end: 0;
+    // XXX Need to be sorted out
+    transform: translateX(50%);
+    transform: translate(50% 50%);
+  }
+}
