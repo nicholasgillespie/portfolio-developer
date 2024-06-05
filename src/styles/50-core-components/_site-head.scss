@@ -2,6 +2,7 @@
 
 .site-head {
   --space-flow: 3em;
+  padding-block-end: var(--space-xl-3xl);
 
   display: grid;
   align-content: end;
@@ -135,7 +136,7 @@
     .site-head__text {
       text-align: center;
       justify-items: center;
-      padding-block: var(--space-l);
+      padding-block: var(--space-l) 0;
 
       h2 {
         line-height: var(--line-height-flat);

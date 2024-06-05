@@ -69,11 +69,11 @@ $spacing: (
     //   "min": 12,
     //   "max": 18,
     // ),
-    // (
-    //   "name": "S - M",
-    //   "min": 16,
-    //   "max": 27,
-    // ),
+    (
+        "name": "S - M",
+        "min": 16,
+        "max": 27,
+      ),
     // (
     //   "name": "M - L",
     //   "min": 24,
@@ -89,21 +89,16 @@ $spacing: (
     //   "min": 48,
     //   "max": 72,
     // ),
-    // (
-    //   "name": "2XL - 3XL",
-    //   "min": 64,
-    //   "max": 108,
-    // ),
     // space value pairs - custom steps
     (
-        "name": "S - M",
+        "name": "S - L",
         "min": 16,
-        "max": 27,
+        "max": 36,
       ),
     (
-      "name": "S - L",
-      "min": 16,
-      "max": 36,
+      "name": "XL - 3XL",
+      "min": 48,
+      "max": 108,
     ),
   ),
 );

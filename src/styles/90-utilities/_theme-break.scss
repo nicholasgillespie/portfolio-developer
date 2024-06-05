@@ -1,0 +1,13 @@
+.u-theme-break {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-start: var(--space-gutter);
+    inline-size: calc(100% - 2 * var(--space-gutter));
+    border-block-end: var(--border);
+    border-color: var(--color-white);
+  }
+}
