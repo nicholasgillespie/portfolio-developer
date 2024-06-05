@@ -96,9 +96,14 @@ $spacing: (
     // ),
     // space value pairs - custom steps
     (
-        "name": "S - L",
+        "name": "S - M",
         "min": 16,
-        "max": 36,
+        "max": 27,
       ),
+    (
+      "name": "S - L",
+      "min": 16,
+      "max": 36,
+    ),
   ),
 );

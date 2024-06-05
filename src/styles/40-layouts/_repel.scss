@@ -12,6 +12,7 @@
 
 .l-repel {
   display: flex;
+  flex-direction: var(--repel-direction, row);
   flex-wrap: var(--repel-wrap, wrap);
   justify-content: var(--repel-horizontal-alignment, space-between);
   align-items: var(--repel-vertical-alignment, center);
@@ -23,6 +24,6 @@
 
   &[data-repel="vertical"] {
     --repel-vertical-alignment: stretch;
-    flex-direction: column;
+    --repel-direction: column;
   }
 }

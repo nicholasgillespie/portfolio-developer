@@ -12,7 +12,7 @@
 // GLOBAL SETTINGS ////////////////////
 body {
   // accent-color: get(color, mint-green);
-  // background: get(color, very-dark-blue);
+  background: get(color, black);
   color: get(color, grey);
   font-family: get(font-family, base);
   font-size: get(font-size, base);
@@ -21,6 +21,10 @@ body {
   letter-spacing: get(letter-spacing, base);
   word-break: break-word;
   font-size-adjust: from-font;
+
+  @include media-query(up-to, "tablet") {
+    // background-color: rgba(255, 0, 0, 0.5);
+  }
 }
 
 // DOCUMENT STRUCTURE ////////////////////

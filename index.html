@@ -32,10 +32,10 @@
     <a href="#main" id="skip-link" class="">Skip to main content</a>
 
     <!-- Header -->
-    <header class="site-head l-wrapper">
+    <header class="[ site-head ][ l-wrapper ]">
       <div class="[ site-head__nav ][ l-repel ]">
         <h1>adamkeyes</h1>
-        <div class="l-cluster">
+        <div class="[ social-icons ][ l-cluster ]">
           <a href="#">
             <img src="/images/icon-github.svg" alt="github" />
           </a>
@@ -49,10 +49,11 @@
             <img src="/images/icon-twitter.svg" alt="twitter" />
           </a>
         </div>
+        <img class="pattern-rings" src="/images/pattern-rings.svg" alt="" />
       </div>
       <div class="[ site-head__text ][ l-flow ]">
         <h2>
-          Nice to meet you! I'm <span class="u-emphasise">Adam Keyes</span>.
+          Nice to meet you! I'm <span class="u-underline">Adam Keyes</span>.
         </h2>
         <p>
           Based in the UK, I’m a front-end developer passionate about building
@@ -60,30 +61,33 @@
         </p>
         <a href="#contact">Contact Me</a>
       </div>
-      <picture class="site-head__img">
-        <source
-          srcset="./images/image-profile-desktop.webp"
-          media="(min-width: 50.001rem)"
-          type="image/webp"
-        />
-        <source
-          srcset="./images/image-profile-tablet.webp"
-          media="(min-width: 30.001rem) and (max-width: 50rem)"
-          type="image/webp"
-        />
-        <source
-          srcset="./images/image-profile-mobile.webp"
-          media="(max-width: 30rem)"
-          type="image/webp"
-        />
-        <img
-          src="./images/image-profile-desktop.webp"
-          alt="Hero"
-          width="563"
-          height="911"
-          loading="eager"
-        />
-      </picture>
+      <div class="site-head__img">
+        <picture>
+          <source
+            srcset="/images/image-profile-desktop.webp"
+            media="(min-width: 50.001rem)"
+            type="image/webp"
+          />
+          <source
+            srcset="/images/image-profile-tablet.webp"
+            media="(min-width: 30.001rem) and (max-width: 50rem)"
+            type="image/webp"
+          />
+          <source
+            srcset="/images/image-profile-mobile.webp"
+            media="(max-width: 30rem)"
+            type="image/webp"
+          />
+          <img
+            src="/images/image-profile-desktop.webp"
+            alt="Hero"
+            width="563"
+            height="911"
+            loading="eager"
+          />
+        </picture>
+        <img class="pattern-circle" src="/images/pattern-circle.svg" alt="" />
+      </div>
     </header>
 
     <!-- Main -->
