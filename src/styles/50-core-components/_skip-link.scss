@@ -4,6 +4,7 @@
   // Position the skip link off-screen
   position: absolute;
   inset-block-start: -100vh;
+  text-decoration: none;
 
   // When focused, bring the skip link back into view
   &:focus-visible {

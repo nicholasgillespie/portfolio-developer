@@ -16,6 +16,10 @@
     text-align: center;
   }
 
+  .l-grid {
+    --space-grid: var(--space-xl) var(--space-gutter);
+  }
+
   .pattern-rings {
     position: absolute;
     inset-block-end: 0;

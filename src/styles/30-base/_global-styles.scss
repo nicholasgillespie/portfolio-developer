@@ -168,6 +168,16 @@ table {
 a {
   display: inline-block;
   text-transform: uppercase;
+  color: get(color, white);
+  letter-spacing: get(letter-spacing, extra-loose);
+  text-decoration-color: var(--color-green);
+  text-decoration-thickness: 0.25ex;
+  text-underline-offset: 1.5ex;
+
+  &:hover,
+  &:focus-visible {
+    color: get(color, green);
+  }
 
   &[aria-current="page"] {
     font-weight: bold;
@@ -185,7 +195,7 @@ a {
 
 :focus-visible {
   outline: 2px solid var(--focus-color, currentColor);
-  outline-offset: var(--focus-offset, 0.2lh);
+  outline-offset: var(--focus-offset, 0.35ch);
 }
 
 // Firefox requires display: inline-block for full element outline.

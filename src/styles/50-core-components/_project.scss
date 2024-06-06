@@ -29,10 +29,38 @@
     .project__item-image-links {
       --stack-vertical-alignment: center;
       --stack-horizontal-alignment: center;
+      --space-stack: var(--space-xl);
 
       position: absolute;
       inset: 0;
-      background-color: rgba(255, 0, 0, 0.5);
+
+      @include media-query(up-to, "desktop") {
+        display: none;
+      }
+
+      a {
+        z-index: -1;
+      }
+
+      &:hover,
+      &:focus-visible,
+      &:focus-within {
+        display: flex;
+        background-color: hsla(0, 0%, 8%, 0.8);
+
+        & > a {
+          z-index: 1;
+        }
+      }
+    }
+  }
+
+  .project__item-text-links {
+    display: none;
+
+    @include media-query(up-to, "desktop") {
+      --space-cluster: 1em;
+      display: flex;
     }
   }
 
