@@ -4,6 +4,10 @@
   --space-region: 0 var(--space-xl-3xl);
   --grid-item-size-min: 30rem;
 
+  h3 {
+    font-size: var(--font-size-m);
+  }
+
   & > ul {
     --space-grid: var(--space-l-2xl) var(--space-gutter);
     margin-block-start: var(--space-gutter);

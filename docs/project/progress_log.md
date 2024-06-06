@@ -40,6 +40,23 @@
 - For the "Skill" section, position the rings pattern.
 - For the "Projects" section, implement hover effect on the project images to display/hide links depending on screen size.
 
+## 2024-06-06 - Morning
+
+### Sections Skill and Project
+
+- Completed the pending TODO tasks.
+
+## 2024-06-06 - Afternoon
+
+### Section Project and Contact
+
+- Finalized the "Project" section and resolved some production issues.
+- Built and completed the "Contact" form.
+
+**To Do:**
+
+- Deal with email errors in the contact form.
+
 ---
 
 ## [Date] - [Session]
