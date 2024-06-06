@@ -118,8 +118,7 @@ b {
   padding: 1em;
   border: none;
   border-block-end: var(--border);
-  // border-radius: var(--radius-s);
-  background: transparent;
+  background: var(--color-grey);
   color: var(--color-light);
   inline-size: 100%;
 
