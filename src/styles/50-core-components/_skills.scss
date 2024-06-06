@@ -8,12 +8,23 @@
     --grid-item-size-min: clamp(14.5rem, 10rem + 9vi, 17.2rem);
   }
   @include media-query(up-to, "desktop") {
-    --grid-item-size-min: clamp(13.2rem, 11.1rem + 7vi, 14.6rem);
+    --grid-item-size-min: clamp(12rem, 7.5rem + 15vi, 15rem);
   }
   @include media-query(up-to, "tablet") {
+    --grid-item-size-min: 999rem;
     --space-grid: 2em;
     --space-flow: 0.75em;
     text-align: center;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset-block-end: 0;
+      inset-inline-start: var(--space-gutter);
+      inline-size: calc(100% - 2 * var(--space-gutter));
+      border-block-end: var(--border);
+      border-color: var(--color-white);
+    }
   }
 
   .l-grid {
@@ -24,8 +35,6 @@
     position: absolute;
     inset-block-end: 0;
     inset-inline-end: 0;
-    // XXX Need to be sorted out
-    transform: translateX(50%);
-    transform: translate(50% 50%);
+    transform: translateY(-25%) translateX(50%);
   }
 }

@@ -46,8 +46,7 @@
 
   // Decorations
   --focus-color: #{get(color, green)};
-  // --focus-color: red;
-  --border-color: #{get(color, green)};
+  --border-color: #{get(color, grey)};
   --border-width: 2px;
   --border: solid var(--border-width) var(--border-color);
   --shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);

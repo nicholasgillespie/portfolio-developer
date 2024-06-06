@@ -1,6 +1,33 @@
+@use "../20-mixins/media-query" as *;
+
 .contact {
   background-color: var(--color-dark-grey);
-  p {
-    max-inline-size: 38ch;
+
+  .pattern-rings {
+    position: absolute;
+    inset-block-end: var(--space-xl-3xl);
+    transform: translateX(-70%) translateY(35%);
+
+    @include media-query(up-to, "desktop") {
+      transform: translateX(-70%) translateY(0%);
+    }
+  }
+
+  .contact__text {
+    margin-block-end: var(--space-gutter);
+
+    p {
+      max-inline-size: 38ch;
+    }
+  }
+
+  form {
+    --stack-horizontal-alignment: stretch;
+    --space-stack: 1em;
+
+    input,
+    textarea {
+      --focus-color: var(--color-white);
+    }
   }
 }

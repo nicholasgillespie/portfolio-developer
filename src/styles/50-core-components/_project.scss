@@ -14,9 +14,15 @@
   }
   @include media-query(up-to, "desktop") {
     --grid-item-size-min: clamp(12.5rem, 8.75rem + 12.5vi, 15rem);
+
+    & > ul {
+      --space-grid: var(--space-xl) var(--space-gutter);
+      // --space-grid: 5rem;
+    }
   }
   @include media-query(up-to, "tablet") {
     --grid-item-size-min: 30rem;
+    --space-region: var(--space-2xl) var(--space-xl-3xl);
   }
 
   .project__item {

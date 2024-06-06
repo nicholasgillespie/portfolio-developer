@@ -11,7 +11,7 @@ html {
     inset-block-end: 0;
     inset-inline-start: 50%;
     border-inline-start: var(--wireframe-border);
-    z-index: 9999;
+    z-index: 999;
   }
 }
 
@@ -23,7 +23,7 @@ body {
     inset-block-start: 0;
     inset-block-end: 0;
     border-inline-start: var(--wireframe-border);
-    z-index: 9999;
+    z-index: 999;
   }
 
   &::before {

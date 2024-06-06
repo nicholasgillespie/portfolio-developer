@@ -22,7 +22,6 @@
   .site-head__nav {
     grid-column: nav;
     grid-row: nav;
-    z-index: 1;
     padding-block-start: var(--space-gutter);
     padding-inline-end: var(--space-gutter);
     position: relative;
@@ -41,7 +40,6 @@
   .site-head__text {
     grid-column: text;
     grid-row: text;
-    z-index: 1;
     padding-block: var(--space-gutter);
 
     display: grid;
@@ -71,6 +69,7 @@
     display: flex;
     align-items: flex-end;
     position: relative;
+    z-index: -1;
 
     .pattern-circle {
       position: absolute;
@@ -78,7 +77,6 @@
       inset-inline-start: 0;
       transform: translateX(-50%);
       block-size: var(--space-3xl);
-      z-index: 1;
     }
   }
 
@@ -149,7 +147,6 @@
 
     .site-head__img {
       background-color: unset;
-      z-index: 1;
 
       picture img {
         max-inline-size: 50%;

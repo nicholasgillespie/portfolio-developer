@@ -336,7 +336,8 @@
       </section>
       <section class="contact">
         <div class="l-region l-wrapper l-switcher">
-          <div class="l-flow">
+          <img class="pattern-rings" src="/images/pattern-rings.svg" alt="" />
+          <div class="[ contact__text ][ l-flow ]">
             <h2>Contact</h2>
             <p>
               I would love to hear about your project and how I could help.
@@ -345,13 +346,54 @@
             </p>
           </div>
           <div>
-            <form action=""></form>
+            <form class="l-stack">
+              <div>
+                <label for="name" class="u-vh">Name</label>
+                <input type="text" id="name" name="name" placeholder="Name" />
+              </div>
+              <div>
+                <label for="email" class="u-vh">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Email"
+                />
+              </div>
+              <div>
+                <label for="message" class="u-vh">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="Message"
+                ></textarea>
+              </div>
+              <button class="button" type="submit">Send message</button>
+            </form>
           </div>
         </div>
       </section>
     </main>
 
     <!-- Footer -->
-    <footer>footer</footer>
+    <footer class="site-foot">
+      <div class="l-wrapper l-region l-repel">
+        <h2 class="u-font-size-title">adamkeyes</h2>
+        <div class="[ social-icons ][ l-cluster ]">
+          <a href="#">
+            <img src="/images/icon-github.svg" alt="github" />
+          </a>
+          <a href="#">
+            <img src="/images/icon-frontend-mentor.svg" alt="frontend mentor" />
+          </a>
+          <a href="#">
+            <img src="/images/icon-linkedin.svg" alt="linkedin" />
+          </a>
+          <a href="#">
+            <img src="/images/icon-twitter.svg" alt="twitter" />
+          </a>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

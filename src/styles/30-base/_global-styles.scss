@@ -110,26 +110,39 @@ b {
 //   accent-color: var(--color-accent);
 // }
 
-// :is(
-//     input:not([type="checkbox"], [type="radio"], [type="color"]),
-//     select,
-//     textarea
-//   ) {
-//   padding: 0.5em 0.8em;
-//   border-radius: var(--radius-s);
-//   border: var(--stroke-solid);
-//   background: var(--color-dark-glare);
-//   color: var(--color-light);
-//   inline-size: 100%;
+:is(
+    input:not([type="checkbox"], [type="radio"], [type="color"]),
+    select,
+    textarea
+  ) {
+  padding: 1em;
+  border: none;
+  border-block-end: var(--border);
+  // border-radius: var(--radius-s);
+  background: transparent;
+  color: var(--color-light);
+  inline-size: 100%;
 
-//   &::placeholder {
-//     color: rgb(255 255 255 / 70%);
-//   }
-// }
+  &::placeholder {
+    color: #848484;
+    text-transform: uppercase;
+  }
+}
 
 input,
 label {
   line-height: get(line-height, fine);
+}
+
+input {
+  border: none;
+  border-block-end: var(--border);
+  // border-block-end: var(--color-white);
+  // background: transparent;
+}
+
+textarea {
+  resize: none; // Disables the resize option
 }
 
 // label::after {
