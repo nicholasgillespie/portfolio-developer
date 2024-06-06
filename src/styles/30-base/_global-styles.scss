@@ -110,11 +110,9 @@ b {
 //   accent-color: var(--color-accent);
 // }
 
-:is(
-    input:not([type="checkbox"], [type="radio"], [type="color"]),
-    select,
-    textarea
-  ) {
+input:not([type="checkbox"], [type="radio"], [type="color"]),
+select,
+textarea {
   padding: 1em;
   border: none;
   border-block-end: var(--border);
