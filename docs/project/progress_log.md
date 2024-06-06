@@ -56,6 +56,7 @@
 **To Do:**
 
 - Deal with email errors in the contact form.
+- Include a theme-break in between contact and footer sections.
 
 ---
 
