@@ -19,6 +19,14 @@
     p {
       max-inline-size: 38ch;
     }
+
+    @include media-query(up-to, "tablet") {
+      text-align: center;
+
+      p {
+        margin-inline: auto;
+      }
+    }
   }
 
   form {
