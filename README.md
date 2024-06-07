@@ -17,6 +17,10 @@ The project uses:
 
 You can find the Portfolio Developer project repository on [GitHub](https://github.com/nicholasgillespie/portfolio-developer).
 
+## Development Progress
+
+To see the progression of the site development, check out the [Progress Log](./docs/project/progress_log.md).
+
 ## Getting Started
 
 ### Prerequisites
