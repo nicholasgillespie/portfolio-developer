@@ -1,5 +1,9 @@
 # Progress Log
 
+## Project Duration
+
+The Portfolio Developer project was developed over a span of 3 days, from June 4, 2024, to June 6, 2024.
+
 ## 2024-06-04 - Morning
 
 ### Project Setup

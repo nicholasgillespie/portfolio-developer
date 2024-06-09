@@ -85,6 +85,9 @@
     --space-wrapper: var(--space-gutter) 0;
     --space-flow: 2em;
 
+    overflow-x: clip;
+    overflow-y: visible;
+
     .site-head__nav {
       .pattern-rings {
         inset-block-end: calc(

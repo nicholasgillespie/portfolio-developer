@@ -1,8 +1,8 @@
-// import emailChecker from "./email-checker.js";
+import emailChecker from "./email-checker.js";
 
 const app = {
   initialize() {
-    // emailChecker.activate();
+    emailChecker.activate();
   },
 };
 
