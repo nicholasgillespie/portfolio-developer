@@ -37,5 +37,17 @@
     textarea {
       --focus-color: var(--color-white);
     }
+
+    button {
+      --space-stack: 2em;
+    }
+
+    .error-message {
+      position: absolute;
+      font-size: var(--font-size-info);
+      inset-inline-end: 0;
+      inset-block-end: calc(2.2em * -1);
+      color: #ff6f5b;
+    }
   }
 }
